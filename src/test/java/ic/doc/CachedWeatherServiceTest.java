@@ -45,7 +45,8 @@ public class CachedWeatherServiceTest {
 
     private void checkLondonForecast(CachedWeatherService cachedWeatherService) {
         context.checking(new Expectations() {{
-            exactly(1).of(upperStream).getWeatherForecast("LONDON", DayOfWeek.FRIDAY);
+            exactly(1).of(upperStream).getWeatherForecast("LONDON",
+                    DayOfWeek.FRIDAY);
         }});
         cachedWeatherService.getWeatherForecast("LONDON", DayOfWeek.FRIDAY);
         cachedWeatherService.getWeatherForecast("LONDON", DayOfWeek.FRIDAY);
@@ -54,8 +55,10 @@ public class CachedWeatherServiceTest {
 
     private void checkTwoLocationForecast(CachedWeatherService cachedWeatherService){
         context.checking(new Expectations() {{
-            exactly(2).of(upperStream).getWeatherForecast("GLASGLOW", DayOfWeek.FRIDAY);
-            exactly(1).of(upperStream).getWeatherForecast("EDINBURGH", DayOfWeek.FRIDAY);
+            exactly(2).of(upperStream).getWeatherForecast("GLASGLOW",
+                    DayOfWeek.FRIDAY);
+            exactly(1).of(upperStream).getWeatherForecast("EDINBURGH",
+                    DayOfWeek.FRIDAY);
         }});
         cachedWeatherService.getWeatherForecast("GLASGLOW", DayOfWeek.FRIDAY);
         cachedWeatherService.getWeatherForecast("EDINBURGH", DayOfWeek.FRIDAY);
