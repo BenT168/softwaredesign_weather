@@ -5,7 +5,7 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.time.DayOfWeek;
+import static java.time.DayOfWeek.*;
 import static org.junit.Assert.assertTrue;
 
 
@@ -39,30 +39,27 @@ public class CachedWeatherServiceTest {
         assertTrue(cachedWeatherService.size() == 2);
 
         cachedWeatherService.setTimer(time);
-        cachedWeatherService.getWeatherForecast("GLASGLOW", DayOfWeek.FRIDAY);
+        cachedWeatherService.getWeatherForecast("GLASGOW", FRIDAY);
         assertTrue(cachedWeatherService.size() == 1);
     }
 
     private void checkLondonForecast(CachedWeatherService cachedWeatherService) {
         context.checking(new Expectations() {{
-            exactly(1).of(upperStream).getWeatherForecast("LONDON",
-                    DayOfWeek.FRIDAY);
+            exactly(1).of(upperStream).getWeatherForecast("LONDON", FRIDAY);
         }});
-        cachedWeatherService.getWeatherForecast("LONDON", DayOfWeek.FRIDAY);
-        cachedWeatherService.getWeatherForecast("LONDON", DayOfWeek.FRIDAY);
-        cachedWeatherService.getWeatherForecast("LONDON", DayOfWeek.FRIDAY);
+        cachedWeatherService.getWeatherForecast("LONDON", FRIDAY);
+        cachedWeatherService.getWeatherForecast("LONDON", FRIDAY);
+        cachedWeatherService.getWeatherForecast("LONDON", FRIDAY);
     }
 
     private void checkTwoLocationForecast(CachedWeatherService cachedWeatherService){
         context.checking(new Expectations() {{
-            exactly(2).of(upperStream).getWeatherForecast("GLASGLOW",
-                    DayOfWeek.FRIDAY);
-            exactly(1).of(upperStream).getWeatherForecast("EDINBURGH",
-                    DayOfWeek.FRIDAY);
+            exactly(2).of(upperStream).getWeatherForecast("GLASGOW", FRIDAY);
+            exactly(1).of(upperStream).getWeatherForecast("EDINBURGH", FRIDAY);
         }});
-        cachedWeatherService.getWeatherForecast("GLASGLOW", DayOfWeek.FRIDAY);
-        cachedWeatherService.getWeatherForecast("EDINBURGH", DayOfWeek.FRIDAY);
-        cachedWeatherService.getWeatherForecast("GLASGLOW", DayOfWeek.FRIDAY);
+        cachedWeatherService.getWeatherForecast("GLASGOW", FRIDAY);
+        cachedWeatherService.getWeatherForecast("EDINBURGH", FRIDAY);
+        cachedWeatherService.getWeatherForecast("GLASGOW", FRIDAY);
     }
 
 
